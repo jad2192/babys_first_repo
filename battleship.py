@@ -1,5 +1,7 @@
 #!/usr/bin/python3
-
+'''
+Command line battleship game I programmed as a self-learning exercise while first learning to program in python.
+'''
 #init
 import random
 #generate coordinates
