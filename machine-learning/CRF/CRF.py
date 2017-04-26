@@ -14,7 +14,7 @@ def log_sum_exp(x):
 
 def label_seq(l,j):
     '''Creates a list of all posible length l sequences taking values in
-       {0,1,...,j-1}. Out put list is of length j^l'''
+       {0,1,...,j-1}. Output list is of length j^l'''
     
     return list(set(CWR(range(j),l)).union(set(itertools.permutations(range(j),l))))
 
@@ -114,7 +114,7 @@ class CRF(object):
         
         for l in range(self.L):
             
-            deltas[0][l] = dot(self.W, f(l,y_0,x,1))
+            deltas[0][l] = dot(self.W, f(l,y_0,x,1))  # Not sure about this
             
         # Recursion
         
