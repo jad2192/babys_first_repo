@@ -1,16 +1,8 @@
-
-# coding: utf-8
-
-# In[1]:
-
 import numpy as np
 from numpy import log, exp, zeros, dot, array
 import itertools
 from itertools import product
 import timeit
-
-
-# In[2]:
 
 def log_sum_exp(x):
     
@@ -257,7 +249,7 @@ class CRF(object):
         return grad
 
 
-# In[37]:
+
 
 def feat_map(i, j, x, t, projection=-1):
     
@@ -287,9 +279,6 @@ def feat_map(i, j, x, t, projection=-1):
         return binary_chi
 
 
-# In[37]:
-
-# Generate simple test data: Length 5 chains, 3 class labels, each feature vector is 5 dimensional
 
 features = np.zeros((99, 5, 5))
 
@@ -309,58 +298,48 @@ for k in range(33):
     labels[k+66] = 2
 
 
-# In[38]:
 
 features[0]
 
 
-# In[124]:
+
 
 crf_test = CRF(feat_map, 45, 5, 3, 1)
 
 
-# In[125]:
 
 crf_test.MAP(features[1])
 
 
-# In[126]:
 
 crf_test.naive_comp(features[1],'MAP')
 
 
-# In[127]:
 
 crf_test.naive_comp(features[0])
 
 
-# In[128]:
 
 crf_test.log_partition(features[0])
 
 
-# In[129]:
 
 m_test = np.array([crf_test.marginal(i,j,features[12],2) for i in range(3) for j in range(3)])
 
 
-# In[130]:
 
 m_test.sum()
 
 
-# In[5]:
 
 from oct2py import octave
 octave.addpath('/home/james/anaconda3/data/HW')
 
 
-# In[6]:
 
 X = octave.data_generator()
 
 
-# In[11]:
 
 def feat_map_toy(i, j, x, t, project=-1):
     ''' Change the values of feature vector length and number of classes. '''
@@ -395,22 +374,19 @@ def feat_map_toy(i, j, x, t, project=-1):
         return output
 
 
-# In[13]:
+
 
 crf_test1 = CRF(feat_map_toy,16 + 64,10, 4, 1)
 
 
-# In[14]:
 
 marg_test = np.array([crf_test1.marginal(i,j,X_f[6],3) for i in range(4) for j in range(4)])
 
 
-# In[15]:
 
 marg_test.sum()
 
 
-# In[7]:
 
 X_f = np.zeros((150,10,4))
 
@@ -421,7 +397,6 @@ for k in range(150):
         X_f[k,j,:] = X[k][0][:,j]
 
 
-# In[8]:
 
 y_f = np.zeros((150,10))
 
@@ -432,27 +407,23 @@ for k in range(150):
 y_f = np.asarray(y_f,dtype='i4')
 
 
-# In[9]:
 
 y_f
 
 
-# In[ ]:
 
 crf_test1.gradient(X_f,y_f)
 
 
-# In[26]:
 
 X.shape[0]
 
 
-# In[36]:
 
 X_f[149]
 
 
-# In[21]:
+
 
 times, times1 = [], []
 for k in range(10):
@@ -472,8 +443,6 @@ for k in range(10):
 print(0.1*sum(times))
 print(0.1*sum(times1))
 
-
-# In[ ]:
 
 
 
