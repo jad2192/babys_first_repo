@@ -247,6 +247,39 @@ class CRF(object):
             grad[k] = (first_term + sec_term).sum() - self.W[k] * lamb
             print(k)
         return grad
+    
+    
+    def gradient_f(self, X, Y):
+        
+        f = self.f_x
+        lamb = self.Lambda
+        grad_f = np.zeros(self.K)
+        lab_pairs = label_seq(2,self.L)
+        
+        for n in range(X.shape[0]):
+            
+            grad = np.zeros(self.K)
+            x, y = X[n], Y[n]
+            
+            for t in range(self.T):
+            
+                grad = grad + f(y[t],y[t-1],x,t)
+        
+            for pair in lab_pairs:
+            
+                y, y_p = pair[0], pair[1]
+                grad_temp = np.zeros(self.K)
+            
+                for t in range(self.T):
+                
+                    marg = self.marginal(y,y_p,x,t)
+                    grad_temp = grad_temp + (marg*f(y,y_p,x,t))
+        
+                grad = grad - grad_temp
+            
+            grad_f = grad_f + grad
+    
+        return grad_f - self.W * lamb
 
 
 
