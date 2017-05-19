@@ -3,7 +3,7 @@
 def aug_images(fp = 'filepath', spec, iter):
   '''Data augmentation function.
      fp: filepath to the images to augment. Assuming each species in its own folder and for each
-         species folder (e.g fp/ALB) also assumes  there is a dual fodler  named fp/augemented in
+         species folder (e.g fp/ALB) also assumes there is a dual folder named fp/augemented in
          which to place the augemented images.
          
      spec: ALB, BET, LAG ... etc. The name of species to augment.
