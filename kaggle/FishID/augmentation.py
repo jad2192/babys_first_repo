@@ -1,4 +1,7 @@
 # Data Augmentation Function
+import numpy as np
+import PIL
+
 
 def aug_images(fp = 'filepath', spec, iter):
   '''Data augmentation function.
