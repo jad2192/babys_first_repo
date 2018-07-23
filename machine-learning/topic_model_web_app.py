@@ -12,7 +12,7 @@ from tkinter import *
 from tqdm import tqdm
 
 plt.style.use('fivethirtyeight')
-
+print('version test')
     
 ###############################################################################  
 ############### Functions Used In Execution of the Program.####################
