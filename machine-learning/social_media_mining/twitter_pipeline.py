@@ -33,16 +33,16 @@ from time_series_analysis import HMM, EARS, get_counts, discretize2
 #####       Set up twitter API, SQL Database and SMTP Connections         #####
 ###############################################################################
 
-consumer_key = 'JdI7kqED9hckbSGCEtzXX42yM'
-consumer_secret = 'C08YWRgXcyg55Jo4kVDprwUhxw8GZY5Ofn0snu0e31Ap6kwDqa'
+consumer_key = 'key'
+consumer_secret = 'secret'
 api = twitter.Api(consumer_key=consumer_key, consumer_secret=consumer_secret,
                  application_only_auth=True,
                  tweet_mode='extended')
 
 conn = pyodbc.connect(
     r'DRIVER={SQL Server};'
-    r'SERVER=sql12ynk08vp;'
-    r'DATABASE=boca;'
+    r'SERVER= server;'
+    r'DATABASE=db;'
     r'Trusted_Connection=yes'
     )
 cursor = conn.cursor()
@@ -50,10 +50,10 @@ cursor = conn.cursor()
 #email_add = str(input('Enter Consumer.org Email address: '))
 #pw = getpass.getpass()
 #creds = (email_add, pw)
-creds = 'EWS_Pipeline_Script@consumer.org'
-smtp_handler = logging.handlers.SMTPHandler(mailhost=("smtp.consumer.org"),
+creds = ''
+smtp_handler = logging.handlers.SMTPHandler(mailhost=(""),
                                         fromaddr=creds, 
-                                        toaddrs='james.diotte@consumer.org',
+                                        toaddrs='',
                                         subject= u"EWS Pipeline Error",
                                         secure=())
 logger = logging.getLogger()
@@ -89,7 +89,7 @@ def get_brands(fp):
     
     return brands
 ###############################################################################
-#####                             ETL Functions                           #####
+#####                            Mining Functions                         #####
 ###############################################################################
 
 def get_tweets(query, since_date, until_date):
@@ -340,8 +340,8 @@ def job(brands, db_name):
         
 ###############################################################################    
     me = creds
-    to = "james.diotte@consumer.org"
-    cc = "dsullivan@consumer.org"
+    to = ""
+    cc = ""
     string =  'This is an auto-generated email\n'
     if not saved:
         string += '!THERE WAS A SAVE ERROR, PLEASE RUN BACKUP SCRIPT! \n'
@@ -371,8 +371,8 @@ def job(brands, db_name):
 
 if __name__ == '__main__':
     
-    db_name = 'EWS_Tweet_Stream_Ph2'
-    fp = 'C:\\Users\\DIOTJA\\Desktop\\Data\\brands.csv'
+    db_name = ''
+    fp = ''
     brands = get_brands(fp)
     job(brands, db_name)
 
